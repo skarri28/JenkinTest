@@ -36,7 +36,7 @@
  						<username>sruthi_mallidi</username> 
  						<password>Sahimal@1234</password>
                         <environment>Sandbox</environment>
-                        <applicationName>mysecond</applicationName>
+                        <applicationName>mythird</applicationName>
                         <businessGroup>Training</businessGroup>
                         <workerType>MICRO</workerType>
                         <workers>1</workers>
