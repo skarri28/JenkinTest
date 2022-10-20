@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1fe9ced9-fe75-4e7c-974f-f32d8d1f1d55" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="jenkintestFlow" doc:id="fdfb5565-e3a1-4d4d-9e64-65cc306f8488" >
+		<http:listener doc:name="Listener" doc:id="490b762d-487d-4195-bd87-1e1dd7bc1462" config-ref="HTTP_Listener_config" path="/test"/>
+		<set-payload value="#[[2,3,4]]" doc:name="Set Payload" doc:id="25a75b8e-f892-4e5a-b201-be9f04b878ea" />
+		<ee:transform doc:name="Transform Message" doc:id="44e1eeca-aa1b-40df-bd1f-a2e59948c7e9" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="cea730f6-bd1c-4d48-b59d-4479ac37ac2a" message="#[payload]"/>
+	</flow>
+</mule>
